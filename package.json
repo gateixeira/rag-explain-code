@@ -1,0 +1,21 @@
+{
+  "name": "rag-explain-code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@langchain/community": "^0.3.40",
+    "@langchain/openai": "^0.5.5",
+    "chromadb": "^2.2.0",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "langchain": "^0.3.21",
+    "recursive-readdir": "^2.2.3"
+  }
+}
