@@ -1,6 +1,6 @@
 # RAG Code Explanation Service
 
-A demo REST API service that uses Retrieval-Augmented Generation (RAG) to load and analyze codebases, helping developers understand code through natural language queries.
+A demo REST API service that uses [Retrieval-Augmented Generation (RAG)](https://www.promptingguide.ai/techniques/rag) to load and analyze codebases, helping developers understand code through natural language queries.
 
 ## Features
 
@@ -18,10 +18,10 @@ A demo REST API service that uses Retrieval-Augmented Generation (RAG) to load a
 
 This project uses:
 
-- @langchain/community and @langchain/openai for RAG capabilities
+- [@langchain/community](https://github.com/langchain-ai/langchainjs/tree/main/libs/langchain-community) and [@langchain/openai](https://github.com/langchain-ai/langchainjs/tree/main/langchain-core) for RAG capabilities
 - express for the REST API
 - recursive-readdir for codebase scanning
-- chromadb for vector storage
+- in-memory vector storage
 
 ## Installation & Configuration
 
