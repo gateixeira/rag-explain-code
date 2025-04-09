@@ -14,15 +14,6 @@ A demo REST API service that uses Retrieval-Augmented Generation (RAG) to load a
 - OpenAI API key
 - Environment variables configured (see Configuration section)
 
-## Installation
-
-1. Clone the repository
-2. Install dependencies:
-
-```bash
-npm install
-```
-
 ## Dependencies
 
 This project uses:
@@ -32,14 +23,60 @@ This project uses:
 - recursive-readdir for codebase scanning
 - chromadb for vector storage
 
-## Configuration
+## Installation & Configuration
 
-Create a `.env` file in the root directory with the following variables:
+1. Clone the repository
+2. Install dependencies:
 
+```bash
+npm install
 ```
-PORT=3000 # Optional, defaults to 3000
-OPENAI_API_KEY=your_openai_api_key # Required
-```
+
+3. Configure your environment:
+   - Create a `.env` file in the root directory
+   - Add the following variables:
+   ```
+   OPENAI_API_KEY=your_openai_api_key # Required
+   PORT=3000 # Optional, defaults to 3000
+   ```
+
+## Getting Started
+
+1. Start the server:
+   There are two ways to start the application:
+
+   Using npm:
+
+   ```bash
+   npm start
+   ```
+
+   Or directly with Node:
+
+   ```bash
+   node server.js
+   ```
+
+2. Test the server:
+   Once started, you can test the endpoints:
+
+   - The server will be running at `http://localhost:3000`
+   - Try loading a codebase using the `/load` endpoint
+   - Then analyze code using the `/analyze` endpoint
+
+3. Example usage with curl:
+
+   ```bash
+   # Load a codebase
+   curl -X POST http://localhost:3000/load \
+     -H "Content-Type: application/json" \
+     -d '{"path": "/path/to/your/codebase"}'
+
+   # Analyze code
+   curl -X POST http://localhost:3000/analyze \
+     -H "Content-Type: application/json" \
+     -d '{"question": "What does this codebase do?"}'
+   ```
 
 ## API Endpoints
 
@@ -99,26 +136,6 @@ This service uses a Retrieval-Augmented Generation (RAG) architecture to analyze
 5. **Generation**: Uses GPT-4 to generate explanations based on the retrieved code context
 
 The system maintains the vector store in memory during runtime, so you need to reload the codebase if you restart the server.
-
-## Running the Server
-
-Start the server:
-
-```bash
-node server.js
-```
-
-The server will start running on http://localhost:3000 (or the port specified in your .env file).
-
-## Error Handling
-
-The API includes proper error handling for:
-
-- Missing required parameters
-- Server-side processing errors
-- Invalid requests
-
-All errors are returned with appropriate HTTP status codes and error messages.
 
 ## Contributing
 
