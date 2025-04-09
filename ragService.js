@@ -38,14 +38,11 @@ async function loadDocuments(dirPath) {
     return documents;
 }
 
-async function processCodebase(dirPath, question) {
-    // Initialize OpenAI and embeddings
-    const embeddings = new OpenAIEmbeddings();
-    const model = new ChatOpenAI({
-        temperature: 0,
-        modelName: 'gpt-4-turbo-preview',
-    });
+let vectorStore = null;
 
+async function loadCodebase(dirPath) {
+    const embeddings = new OpenAIEmbeddings();
+    
     // Load and process documents
     console.log('Loading documents...');
     const documents = await loadDocuments(dirPath);
@@ -59,10 +56,23 @@ async function processCodebase(dirPath, question) {
 
     // Create vector store in memory
     console.log('Creating vector store...');
-    const vectorStore = await MemoryVectorStore.fromDocuments(
+    vectorStore = await MemoryVectorStore.fromDocuments(
         splitDocs,
         embeddings
     );
+    
+    return { message: 'Codebase loaded successfully' };
+}
+
+async function analyzeCode(question) {
+    if (!vectorStore) {
+        throw new Error('Codebase not loaded. Please load a codebase first.');
+    }
+
+    const model = new ChatOpenAI({
+        temperature: 0,
+        modelName: 'gpt-4-turbo-preview',
+    });
 
     // Create retriever
     const retriever = vectorStore.asRetriever({
@@ -85,4 +95,4 @@ async function processCodebase(dirPath, question) {
     return response.content;
 }
 
-module.exports = { processCodebase };
+module.exports = { loadCodebase, analyzeCode };
